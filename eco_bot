@@ -1,0 +1,24 @@
+mport telebot
+import os
+
+bot = telebot.TeleBot("TOKEN")
+
+@bot.message_handler(commands=['start'])
+def send_start(message):
+    bot.reply_to(message, "Привет! это бот-эколог."
+    "СПИСОК КОМАНД: " \
+    "decomposition - таблица с с временем разложения предметов" \
+    "info - тескт с информацией, каки предметы можно выбрасать, а какие стоит отдавать на переработку и т.д "
+    "")
+
+@bot.message_handler(commands=['decomposition'])
+def send_welcome(message):
+    with open(fr'C:\Users\Ирина\проекты VS code\eco_bot\scale_1200.png', 'rb') as f:
+        bot.send_photo(message.chat.id, f)
+
+@bot.message_handler(commands=['info'])
+def send_info(message):
+    with open(fr'C:\Users\Ирина\проекты VS code\eco_bot\inf.txt', 'r', encoding='utf-8') as f:
+        te = f.read()
+        print(te)
+        bot.reply_to(message, te)
